@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from "@angular/router";
+import { IPost } from 'src/app/models/post';
+import {PostService} from "../../services/post.service";
 
 @Component({
   selector: 'app-posts-of-user',
@@ -7,9 +9,15 @@ import {Router} from "@angular/router";
   styleUrls: ['./posts-of-user.component.scss']
 })
 export class PostsOfUserComponent implements OnInit {
+  post:IPost[]
 
-  constructor(private router:Router) {
-    console.log(this.router.getCurrentNavigation()?.extras.state)
+  constructor(private postService:PostService, private activatedroute:ActivatedRoute) {
+    this.activatedroute.params.subscribe(value=> {
+      this.postService.getUserPosts(value.id).subscribe(value=>{
+        this.post = value;
+        console.log(this.post)
+      })
+    })
   }
 
   ngOnInit(): void {

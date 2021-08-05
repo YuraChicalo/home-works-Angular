@@ -15,4 +15,9 @@ export class PostService {
   getPosts():Observable<IPost[]> {
     return this.httpClient.get<IPost[]>(this.url + '/posts')
   }
+
+  getUserPosts(id: number):Observable<IPost[]> {
+    return this.httpClient.get<IPost[]>(this.url + '/users/'+id+'/posts')
+  }
+
 }

@@ -21,6 +21,6 @@ export class UserComponent implements OnInit {
   }
 
   goToPosts() {
-    this.router.navigate(['/users/'+this.user.id+'/posts'], {state: this.user})
+    this.router.navigate(['/users/'+this.user.id+'/posts'])
   }
 }
